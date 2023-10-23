@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sgps-web:
+    container_name: sgps-web
+    image: sgps-web
+    build:
+      context: .
+    ports:
+      - '8000:80'
+    environment:
+      - SGPS_API_URL=http://localhost:8080/sgps
+    restart: on-failure
+    networks:
+      - sgps-web-network
+networks:
+  sgps-web-network:
+    driver: bridge
+    name: sgps-web-network

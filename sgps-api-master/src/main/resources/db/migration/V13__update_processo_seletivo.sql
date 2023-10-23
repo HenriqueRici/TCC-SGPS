@@ -1,0 +1,1 @@
+ALTER TABLE `sgps-db`.processo_seletivo ADD path_pdf varchar(100) NOT NULL;

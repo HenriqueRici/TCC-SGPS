@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  database:
+    container_name: sgps-database
+    image: mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: 'sgps-db'
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    restart: on-failure
+    networks:
+      - sgps-network
+  sgps-api:
+    image: sgps-api
+    container_name: sgps-api
+    restart: on-failure
+    environment:
+      - SGPS_DB_HOST=sgps-database
+      - SGPS_DB_PORT=3306
+      - SGPS_DATA_API=http://localhost:8081/data-sgps
+    build:
+      context: .
+    depends_on:
+      - database
+    ports:
+      - '8080:8080'
+    networks:
+      - sgps-network
+networks:
+  sgps-network:
+    name: sgps-network
+    driver: bridge

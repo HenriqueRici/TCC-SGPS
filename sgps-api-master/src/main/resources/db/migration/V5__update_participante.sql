@@ -1,0 +1,1 @@
+ALTER TABLE `sgps-db`.participante ADD CONSTRAINT participante_usuario_un UNIQUE KEY (id_usuario);
