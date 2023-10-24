@@ -7,9 +7,11 @@ RUN mvn clean package -DskipTests
 
 FROM amazoncorretto:17-alpine
 
-#RUN apk add --no-cache fontconfig ttf-dejavu
-#RUN apk add tzdata
+RUN apk add --no-cache fontconfig ttf-dejavu
+RUN apk add tzdata
 WORKDIR /app
 COPY --from=build /app/target/*.jar ./api.jar
+ENV TZ=America/Cuiaba
+
 
 ENTRYPOINT [ "sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -Duser.region=BR -Duser.language=pt ${JAVA_OPTS} -jar /app/api.jar" ]

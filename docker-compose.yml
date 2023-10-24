@@ -25,7 +25,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: root
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - ./docker/sgps-external-system-database/mysql:/var/lib/mysql
     restart: on-failure
     networks:
       - sgps-network
@@ -58,7 +58,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: root
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - ./docker/sgps-database/mysql:/var/lib/mysql
     restart: on-failure
     networks:
       - sgps-network
